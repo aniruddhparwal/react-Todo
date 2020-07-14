@@ -6,6 +6,10 @@ const handleSubmit = (e, notes, setNotes, input, setInput) => {
     const id = (notes.length) ? notes[notes.length - 1].id + 1 : 0
     console.log("note handleSubmit id", id)
     setNotes([...notes, { id: id, message: input }])
+    setInput('')
+}
+const deleteNote = (id, notes, setNotes) => {
+    setNotes(notes.filter(note => note.id != id))
 }
 
 export default () => {
@@ -14,7 +18,7 @@ export default () => {
         { id: 1, message: 'it works' },
         { id: 2, message: 'second' }
     ])
-    const [input, setInput] = useState('dd')
+    const [input, setInput] = useState('')
     return (
         <div className="Notes">
             <form onSubmit={(e) => handleSubmit(e, notes, setNotes, input, setInput)}>
@@ -24,7 +28,7 @@ export default () => {
             </form>
             {
                 notes.map(note => (
-                    <Note message={note.message} id={note.id} />
+                    <Note message={note.message} id={note.id} deleteNote={(id) => deleteNote(id, notes, setNotes)} />
                 ))
             }
         </div >

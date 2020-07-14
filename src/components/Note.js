@@ -1,8 +1,13 @@
 import React from "react"
 
-export default ({ message, id }) => (
+export default ({ message, id, deleteNote }) => (
     < div className="Note" >
-        {message} | { id}
+        <p>
+            {message} | {id}
+        </p>
+        <div>
+            <button onClick={() => deleteNote(id)}>delete this node</button>
+        </div>
     </div >
 
 )
