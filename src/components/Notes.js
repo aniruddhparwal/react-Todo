@@ -1,10 +1,11 @@
 import React, { useState } from "react"
 import Note from "./Note"
 
-handleSubmit = (e, notes, setNotes) => {
+const handleSubmit = (e, notes, setNotes, input, setInput) => {
     e.preventDefault()
-
-    setNotes([...notes, { id: 10, message: "Sss" }])
+    const id = (notes.length) ? notes[notes.length - 1].id + 1 : 0
+    console.log("note handleSubmit id", id)
+    setNotes([...notes, { id: id, message: input }])
 }
 
 export default () => {
@@ -13,16 +14,19 @@ export default () => {
         { id: 1, message: 'it works' },
         { id: 2, message: 'second' }
     ])
+    const [input, setInput] = useState('dd')
     return (
         <div className="Notes">
-            <form onSubmit={(e) => handleSubmit(e, notes, setNotes)}>
+            <form onSubmit={(e) => handleSubmit(e, notes, setNotes, input, setInput)}>
+                <input onChange={(e) => setInput(e.target.value)} value={input} />
                 <button>submit</button>
+
             </form>
             {
                 notes.map(note => (
                     <Note message={note.message} id={note.id} />
                 ))
             }
-        </div>
+        </div >
     )
 }
