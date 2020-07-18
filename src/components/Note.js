@@ -1,12 +1,12 @@
 import React from "react"
-
-export default ({ message, id, deleteNote }) => (
+export default ({ message, id, deleteNote, dateTime }) => (
     < div className="Note" >
-        <p>
-            {message} | {id}
-        </p>
+        <h2 >{id}</h2>
+        <h4>{message}</h4>
+        <hr style={{ margin: "10%" }} />
+        <h6>{dateTime}</h6>
         <div>
-            <button onClick={() => deleteNote(id)}>delete this node</button>
+            <button className="pi-button" onClick={() => deleteNote(id)}>Delete</button>
         </div>
     </div >
 
